@@ -1,12 +1,12 @@
 <script
     lang="ts"
     generics="
-        Context extends Exclude<keyof CobaltSettings, 'schemaVersion'>,
-        Id extends keyof CobaltSettings[Context]
+        Context extends Exclude<keyof AstatineSettings, 'schemaVersion'>,
+        Id extends keyof AstatineSettings[Context]
     "
 >
     import settings, { updateSetting } from "$lib/state/settings";
-    import type { CobaltSettings } from "$lib/types/settings";
+    import type { AstatineSettings } from "$lib/types/settings";
 
     import Toggle from "$components/misc/Toggle.svelte";
 

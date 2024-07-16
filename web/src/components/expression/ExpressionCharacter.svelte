@@ -3,15 +3,15 @@
 </script>
 
 <img
-    id="meowbalt-loaf"
-    src="/meowbalt/smile.png"
+    id="expression-character"
+    src="/expression/smile.png"
     height="152"
     width="141"
-    alt={$t("a11y.meowbalt.smile")}
+    alt={$t("a11y.expression.smile")}
 />
 
 <style>
-    #meowbalt-loaf {
+    #expression-character {
         display: block;
         margin: 0;
         object-fit: cover;

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { t } from "$lib/i18n/translations";
 
-    import CobaltLogo from "$components/sidebar/CobaltLogo.svelte";
+    import AstatineLogo from "$components/sidebar/AstatineLogo.svelte";
     import SidebarTab from "$components/sidebar/SidebarTab.svelte";
 
     import IconDownload from "@tabler/icons-svelte/IconDownload.svelte";
@@ -21,7 +21,7 @@
 <svelte:window bind:innerWidth={screenWidth} />
 
 <nav id="sidebar" aria-label={$t("a11y.tabs.tabPanel")}>
-    <CobaltLogo />
+    <AstatineLogo />
     <div id="sidebar-tabs">
         <div id="sidebar-actions" class="sidebar-inner-container">
             <SidebarTab tabName="save" tabLink="/">

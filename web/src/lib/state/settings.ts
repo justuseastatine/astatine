@@ -2,13 +2,13 @@ import { derived, readable, type Updater } from 'svelte/store';
 import { merge } from 'ts-deepmerge';
 
 import type { RecursivePartial } from '../types/generic';
-import type { CobaltSettings } from '../types/settings';
+import type { AstatineSettings } from '../types/settings';
 
 import { migrateOldSettings } from '../settings/migrate';
 import defaultSettings from '../settings/defaults';
 
-type PartialSettings = RecursivePartial<CobaltSettings>;
-type PartialSettingsWithSchema = RecursivePartial<CobaltSettings> & { schemaVersion: number };
+type PartialSettings = RecursivePartial<AstatineSettings>;
+type PartialSettingsWithSchema = RecursivePartial<AstatineSettings> & { schemaVersion: number };
 
 const updatePlausiblePreference = (settings: PartialSettings) => {
     if (settings.privacy?.disableAnalytics) {
@@ -62,9 +62,9 @@ const loadFromStorage = () => {
 
 let update: (_: Updater<PartialSettings>) => void;
 
-// deep merge partial type into full CobaltSettings type
+// deep merge partial type into full AstatineSettings type
 const mergeWithDefaults = (partial: PartialSettings) => {
-    return merge(defaultSettings, partial) as CobaltSettings;
+    return merge(defaultSettings, partial) as AstatineSettings;
 }
 
 export const storedSettings = readable<PartialSettings>(

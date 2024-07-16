@@ -7,7 +7,7 @@ export const filenameStyleOptions = ["classic", "basic", "pretty", "nerdy"] as c
 export const videoQualityOptions = ["max", "2160", "1440", "1080", "720", "480", "360", "240", "144"] as const;
 export const youtubeVideoCodecOptions = ["h264", "av1", "vp9"] as const;
 
-type CobaltSettingsAppearance = {
+type AstatineSettingsAppearance = {
     theme: typeof themeOptions[number],
     language: keyof typeof languages,
     autoLanguage: boolean,
@@ -15,15 +15,15 @@ type CobaltSettingsAppearance = {
     reduceTransparency: boolean,
 };
 
-type CobaltSettingsAdvanced = {
+type AstatineSettingsAdvanced = {
     debug: boolean,
 };
 
-type CobaltSettingsPrivacy = {
+type AstatineSettingsPrivacy = {
     disableAnalytics: boolean
 };
 
-type CobaltSettingsSave = {
+type AstatineSettingsSave = {
     audioFormat: typeof audioFormatOptions[number],
     disableMetadata: boolean,
     downloadMode: typeof downloadModeOptions[number],
@@ -37,12 +37,12 @@ type CobaltSettingsSave = {
     youtubeDubBrowserLang: boolean,
 };
 
-export type CobaltSettings = {
+export type AstatineSettings = {
     schemaVersion: number,
-    advanced: CobaltSettingsAdvanced,
-    appearance: CobaltSettingsAppearance,
-    save: CobaltSettingsSave,
-    privacy: CobaltSettingsPrivacy
+    advanced: AstatineSettingsAdvanced,
+    appearance: AstatineSettingsAppearance,
+    save: AstatineSettingsSave,
+    privacy: AstatineSettingsPrivacy
 };
 
-export type DownloadModeOption = CobaltSettings['save']['downloadMode'];
+export type DownloadModeOption = AstatineSettings['save']['downloadMode'];

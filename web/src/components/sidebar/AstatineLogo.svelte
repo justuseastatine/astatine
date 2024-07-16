@@ -1,13 +1,13 @@
 <script>
-    import IconCobalt from '$lib/icons/Cobalt.svelte';
+    import IconAstatine from '$lib/icons/Astatine.svelte';
 </script>
 
-<div id="cobalt-logo">
-    <IconCobalt />
+<div id="astatine-logo">
+    <IconAstatine />
 </div>
 
 <style>
-    #cobalt-logo {
+    #astatine-logo {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -20,7 +20,7 @@
     }
 
     @media screen and (max-width: 535px) {
-        #cobalt-logo {
+        #astatine-logo {
             display: none;
         }
     }
