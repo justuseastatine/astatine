@@ -40,7 +40,7 @@
 
 <svelte:head>
     <title>
-        {$t("general.cobalt")}: {$t("tabs.settings")}{stringPageTitle}
+        {$t("general.astatine")}: {$t("tabs.settings")}{stringPageTitle}
     </title>
 </svelte:head>
 

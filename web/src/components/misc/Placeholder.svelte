@@ -1,10 +1,10 @@
 <script>
-    import MeowbaltLoaf from "$components/meowbalt/MeowbaltLoaf.svelte";
+    import ExpressionSmile from "$components/expression/ExpressionSmile.svelte";
     export let pageName;
 </script>
 
 <div id="placeholder-container" class="center-column-container">
-    <MeowbaltLoaf />
+    <ExpressionSmile />
     <div>{pageName} page is not ready yet!</div>
 </div>
 

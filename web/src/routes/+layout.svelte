@@ -37,7 +37,7 @@
 
 <div style="display: contents" data-theme={$currentTheme} lang="{$locale}">
     <div
-        id="cobalt"
+        id="astatine"
         data-iphone={device.is.iPhone}
         data-reduce-motion={reduceMotion}
         data-reduce-transparency={reduceTransparency}
@@ -158,7 +158,7 @@
         background-color: var(--secondary);
     }
 
-    #cobalt {
+    #astatine {
         position: fixed;
         height: 100%;
         width: 100%;
@@ -173,7 +173,7 @@
 
     /* add padding for notch / dynamic island in landscape */
     @media screen and (orientation: landscape) {
-        #cobalt[data-iphone="true"] {
+        #astatine.on-iPhone {
             grid-template-columns:
                 calc(
                     var(--sidebar-width)
@@ -183,7 +183,7 @@
                 1fr;
         }
 
-        #cobalt[data-iphone="true"] #content {
+        #astatine[data-iphone="true"] #content {
             padding-right: env(safe-area-inset-right);
         }
     }
@@ -198,7 +198,7 @@
     }
 
     @media screen and (max-width: 535px) {
-        #cobalt {
+        #astatine {
             display: grid;
             grid-template-columns: unset;
             grid-template-rows: 1fr var(--sidebar-height-mobile);

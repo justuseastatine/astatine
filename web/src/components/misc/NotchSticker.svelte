@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    import CobaltSticker from "$lib/icons/CobaltSticker.svelte";
+    import AstatineSticker from "$lib/icons/AstatineSticker.svelte";
 
     // please add a source link (https://github.com/imputnet/cobalt) if you use this implementation
     // i spent 4 hours switching between simulators and devices to get the best way to do this
@@ -39,12 +39,12 @@
     }
 </script>
 
-<div id="cobalt-notch-sticker" aria-hidden="true" class={state}>
-    <CobaltSticker />
+<div id="astatine-notch-sticker" aria-hidden="true" class={state}>
+    <AstatineSticker />
 </div>
 
 <style>
-    #cobalt-notch-sticker {
+    #astatine-notch-sticker {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -54,47 +54,47 @@
         z-index: 999;
     }
 
-    #cobalt-notch-sticker.hidden {
+    #astatine-notch-sticker.hidden {
         display: none;
     }
 
-    #cobalt-notch-sticker.island {
+    #astatine-notch-sticker.island {
         padding-top: 15px;
     }
 
-    #cobalt-notch-sticker.notch {
+    #astatine-notch-sticker.notch {
         padding-top: 2px;
     }
 
-    #cobalt-notch-sticker.notch.x :global(svg) {
+    #astatine-notch-sticker.notch.x :global(svg) {
         height: 28px;
     }
 
-    #cobalt-notch-sticker :global(svg) {
+    #astatine-notch-sticker :global(svg) {
         width: 100px;
         height: 30px;
     }
 
     /* regular iphone size, larger text display mode */
     @media screen and (max-width: 350px) {
-        #cobalt-notch-sticker.notch :global(svg) {
+        #astatine-notch-sticker.notch :global(svg) {
             height: 24px;
         }
 
-        #cobalt-notch-sticker.island {
+        #astatine-notch-sticker.island {
             padding-top: 9px;
         }
     }
 
     /* plus iphone size, dynamic island, larger text display mode */
     @media screen and (max-width: 375px) {
-        #cobalt-notch-sticker.island {
+        #astatine-notch-sticker.island {
             padding-top: 11px;
         }
     }
 
     @media screen and (orientation: landscape) {
-        #cobalt-notch-sticker {
+        #astatine-notch-sticker {
             display: none;
         }
     }

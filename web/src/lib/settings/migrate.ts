@@ -1,5 +1,5 @@
 import type { RecursivePartial } from "$lib/types/generic";
-import type { CobaltSettings } from "$lib/types/settings";
+import type { AstatineSettings } from "$lib/types/settings";
 import defaultSettings from "./defaults";
 
 const oldSwitcherValues = {
@@ -85,7 +85,7 @@ export const migrateOldSettings = () => {
         return;
     }
 
-    const migrated: RecursivePartial<CobaltSettings> = {
+    const migrated: RecursivePartial<AstatineSettings> = {
         schemaVersion: defaultSettings.schemaVersion,
         appearance: {
             theme: getLiteral('theme'),

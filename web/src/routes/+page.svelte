@@ -2,16 +2,16 @@
     import { t } from "$lib/i18n/translations";
 
     import Omnibox from "$components/save/Omnibox.svelte";
-    import MeowbaltLoaf from "$components/meowbalt/MeowbaltLoaf.svelte";
+    import ExpressionSmile from "$components/expression/ExpressionSmile.svelte";
 </script>
 
 <svelte:head>
-    <title>{$t("general.cobalt")}</title>
+    <title>{$t("general.astatine")}</title>
 </svelte:head>
 
-<div id="cobalt-save-container" class="center-column-container">
-    <main id="cobalt-save">
-        <MeowbaltLoaf />
+<div id="astatine-save-container" class="center-column-container">
+    <main id="astatine-save">
+        <ExpressionSmile />
         <Omnibox />
     </main>
     <div id="terms-note">
@@ -20,12 +20,12 @@
 </div>
 
 <style>
-    #cobalt-save-container {
+    #astatine-save-container {
         padding: var(--padding);
         overflow: hidden;
     }
 
-    #cobalt-save {
+    #astatine-save {
         display: flex;
         flex-direction: column;
         align-items: center;

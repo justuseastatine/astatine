@@ -2,10 +2,10 @@
     import { killDialog } from "$lib/dialogs";
     import type { DialogButton } from "$lib/types/dialog";
 
-    import MeowbaltError from "$components/meowbalt/MeowbaltError.svelte";
+    import ExpressionError from "$components/expression/ExpressionError.svelte";
 
     export let id: string;
-    export let meowbalt: string = "";
+    export let expression: string = "";
     export let title: string = "";
     export let bodyText: string = "";
     export let bodySubText: string = "";
@@ -31,10 +31,10 @@
 </script>
 
 <dialog id="dialog-{id}" bind:this={dialogParent} class:closing>
-    <div class="dialog-body small-dialog" class:meowbalt-visible={meowbalt}>
-        {#if meowbalt === "error"}
-            <div class="meowbalt-container">
-                <MeowbaltError />
+    <div class="dialog-body small-dialog" class:expression-visible={expression}>
+        {#if expression === "error"}
+            <div class="expression-container">
+                <ExpressionError />
             </div>
         {/if}
         <div class="popup-header">
@@ -124,11 +124,11 @@
         will-change: transform;
     }
 
-    .small-dialog.meowbalt-visible {
+    .small-dialog.expression-visible {
         padding-top: 45px;
     }
 
-    .meowbalt-container {
+    .expression-container {
         position: absolute;
         top: -110px;
     }

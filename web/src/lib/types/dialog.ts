@@ -8,7 +8,7 @@ export type DialogButton = {
 export type DialogInfo = {
     id: string,
     type: "small",
-    meowbalt: "error",
+    expression: "error",
     title: string,
     bodyText: string,
     bodySubText: string,

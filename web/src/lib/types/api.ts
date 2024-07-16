@@ -1,4 +1,4 @@
-enum CobaltResponseType {
+enum AstatineResponseType {
     Error = 'error',
     RateLimit = 'rate-limit',
     Picker = 'picker',
@@ -6,21 +6,21 @@ enum CobaltResponseType {
     Stream = 'stream',
 }
 
-type CobaltErrorResponse = {
-    status: CobaltResponseType.Error | CobaltResponseType.RateLimit,
+type AstatineErrorResponse = {
+    status: AstatineResponseType.Error | AstatineResponseType.RateLimit,
     text: string,
 };
 
-type CobaltPartialURLResponse = {
+type AstatinePartialURLResponse = {
     url: string,
 }
 
-type CobaltPartialImagesPickerResponse = {
+type AstatinePartialImagesPickerResponse = {
     pickerType: 'images',
-    picker: CobaltPartialURLResponse[],
+    picker: AstatinePartialURLResponse[],
 }
 
-type CobaltPartialVariousPickerResponse = {
+type AstatinePartialVariousPickerResponse = {
     pickerType: 'various',
     picker: {
         type: 'photo' | 'video',
@@ -29,20 +29,20 @@ type CobaltPartialVariousPickerResponse = {
     }[];
 }
 
-type CobaltPickerResponse = {
-    status: CobaltResponseType.Picker
+type AstatinePickerResponse = {
+    status: AstatineResponseType.Picker
     audio: string | false,
-} & (CobaltPartialImagesPickerResponse | CobaltPartialVariousPickerResponse);
+} & (AstatinePartialImagesPickerResponse | AstatinePartialVariousPickerResponse);
 
-type CobaltRedirectResponse = {
-    status: CobaltResponseType.Redirect,
-} & CobaltPartialURLResponse;
+type AstatineRedirectResponse = {
+    status: AstatineResponseType.Redirect,
+} & AstatinePartialURLResponse;
 
-type CobaltStreamResponse = {
-    status: CobaltResponseType.Stream,
-} & CobaltPartialURLResponse;
+type AstatineStreamResponse = {
+    status: AstatineResponseType.Stream,
+} & AstatinePartialURLResponse;
 
-export type CobaltAPIResponse = CobaltErrorResponse
-                            | CobaltPickerResponse
-                            | CobaltRedirectResponse
-                            | CobaltStreamResponse;
+export type AstatineAPIResponse = AstatineErrorResponse
+                            | AstatinePickerResponse
+                            | AstatineRedirectResponse
+                            | AstatineStreamResponse;

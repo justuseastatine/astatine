@@ -1,8 +1,8 @@
 import { get } from 'svelte/store';
 import settings from "$lib/state/settings";
-import type { CobaltAPIResponse } from "$lib/types/api";
+import type { AstatineAPIResponse } from "$lib/types/api";
 
-const apiURL = "https://api.cobalt.tools";
+const apiURL = "https://api.astatine.invalid";
 
 const request = async (url: string) => {
     const saveSettings = get(settings).save;
@@ -26,7 +26,7 @@ const request = async (url: string) => {
         tiktokH265: saveSettings.tiktokH265,
     }
 
-    const response: CobaltAPIResponse | undefined = await fetch(`${apiURL}/api/json`, {
+    const response: AstatineAPIResponse | undefined = await fetch(`${apiURL}/api/json`, {
         method: "POST",
         redirect: "manual",
         body: JSON.stringify(request),
@@ -39,7 +39,7 @@ const request = async (url: string) => {
     return response;
 }
 
-const probeCobaltStream = async (url: string) => {
+const probeAstatineStream = async (url: string) => {
     const request = await fetch(`${url}&p=1`).catch(() => {});
     if (request?.status === 200) {
         return request?.status;
@@ -49,5 +49,5 @@ const probeCobaltStream = async (url: string) => {
 
 export default {
     request,
-    probeCobaltStream,
+    probeAstatineStream,
 }

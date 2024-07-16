@@ -11,7 +11,7 @@
             <SmallDialog
                 id={dialog.id}
                 title={dialog.title}
-                meowbalt={dialog.meowbalt}
+                expression={dialog.expression}
                 bodyText={dialog.bodyText}
                 bodySubText={dialog.bodySubText}
                 buttons={dialog.buttons}

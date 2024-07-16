@@ -18,7 +18,7 @@
     let defaultErrorPopup = {
         id: "save-error",
         type: "small",
-        meowbalt: "error",
+        expression: "error",
         title: "",
         bodySubText: "",
         buttons: [{
@@ -53,7 +53,7 @@
 
     const restoreDownloadButton = () => {
         setTimeout(() => {
-            buttonText = ">>";
+            buttonText = "↓";
             isDisabled = false;
             buttonAltText = $t('a11y.save.download');
         }, 2500);
@@ -103,7 +103,7 @@
         if (response.status === "stream") {
             changeDownloadButton("check");
 
-            const probeResult = await API.probeCobaltStream(response.url);
+            const probeResult = await API.probeAstatineStream(response.url);
 
             if (probeResult === 200) {
                 changeDownloadButton("done");

@@ -1,5 +1,5 @@
 {
-    "name": "cobalt-web",
+    "name": "astatine-web",
     "version": "0.0.1",
     "type": "module",
     "private": true,
@@ -17,12 +17,12 @@
     "license": "AGPL-3.0",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/imputnet/cobalt.git"
+        "url": "git+https://github.com/justuseastatine/astatine.git"
     },
     "bugs": {
-        "url": "https://github.com/imputnet/cobalt/issues"
+        "url": "https://github.com/justuseastatine/astatine/issues"
     },
-    "homepage": "https://cobalt.tools/",
+    "homepage": "https://astatine.invalid/",
     "devDependencies": {
         "@eslint/js": "^9.5.0",
         "@sveltejs/adapter-static": "^3.0.2",

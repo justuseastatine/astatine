@@ -1,8 +1,8 @@
 import { browser } from "$app/environment";
 import { defaultLocale } from "$lib/i18n/translations";
-import type { CobaltSettings } from "$lib/types/settings";
+import type { AstatineSettings } from "$lib/types/settings";
 
-const defaultSettings: CobaltSettings = {
+const defaultSettings: AstatineSettings = {
     schemaVersion: 2,
     advanced: {
         debug: false,
