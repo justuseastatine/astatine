@@ -173,7 +173,7 @@
 
     /* add padding for notch / dynamic island in landscape */
     @media screen and (orientation: landscape) {
-        #astatine.on-iPhone {
+        #astatine[data-iphone="true"] {
             grid-template-columns:
                 calc(
                     var(--sidebar-width)
