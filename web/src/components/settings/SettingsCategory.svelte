@@ -3,7 +3,6 @@
 
     export let sectionId: string;
     export let title: string;
-    export let description: string = "";
 
     let animate = false;
 
@@ -21,23 +20,23 @@
 >
     <h3 class="settings-content-title">{title}</h3>
     <slot></slot>
-
-    {#if description.length > 0}
-        <div class="settings-content-description subtext">{description}</div>
-    {/if}
 </section>
 
 <style>
     .settings-content {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: var(--padding);
         padding: calc(var(--settings-padding) / 2);
         border-radius: 18px;
     }
 
     .settings-content.animate {
         animation: highlight 2s;
+    }
+
+    :global([data-reduce-motion="true"]) .settings-content.animate {
+        animation: highlight-lite 2s !important;
     }
 
     @keyframes highlight {
@@ -48,6 +47,18 @@
             box-shadow: 0 0 0 3.5px var(--blue) inset;
         }
         20%, 50% {
+            box-shadow: 0 0 0 3px var(--blue) inset;
+        }
+        100% {
+            box-shadow: none;
+        }
+    }
+
+    @keyframes highlight-lite {
+        0% {
+            box-shadow: none;
+        }
+        10%, 50% {
             box-shadow: 0 0 0 3px var(--blue) inset;
         }
         100% {

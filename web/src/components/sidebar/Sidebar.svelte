@@ -1,8 +1,6 @@
 <script lang="ts">
     import { t } from "$lib/i18n/translations";
 
-    import { device } from "$lib/device";
-
     import CobaltLogo from "$components/sidebar/CobaltLogo.svelte";
     import SidebarTab from "$components/sidebar/SidebarTab.svelte";
 
@@ -22,7 +20,7 @@
 
 <svelte:window bind:innerWidth={screenWidth} />
 
-<nav id="sidebar" aria-label={$t("a11y.tabs.tabPanel")} class:on-iPhone={device.is.iPhone}>
+<nav id="sidebar" aria-label={$t("a11y.tabs.tabPanel")}>
     <CobaltLogo />
     <div id="sidebar-tabs">
         <div id="sidebar-actions" class="sidebar-inner-container">
@@ -58,15 +56,16 @@
     #sidebar {
         background: var(--sidebar-bg);
         height: 100vh;
-        width: var(--sidebar-width);
+        width: calc(var(--sidebar-width) + var(--sidebar-inner-padding) * 2);
         position: sticky;
-        padding: 0 var(--sidebar-inner-padding);
     }
 
     #sidebar-tabs {
         height: 100%;
+        width: var(--sidebar-width);
         justify-content: space-between;
-        padding-bottom: var(--padding);
+        padding: var(--sidebar-inner-padding);
+        padding-bottom: var(--border-radius);
         overflow-y: scroll;
     }
 
@@ -82,8 +81,8 @@
             height: var(--sidebar-height-mobile);
             position: fixed;
             bottom: 0;
-            padding: var(--sidebar-inner-padding) 0;
             justify-content: center;
+            align-items: flex-start;
         }
 
         #sidebar::before {
@@ -101,6 +100,9 @@
             overflow-y: visible;
             overflow-x: scroll;
             padding-bottom: 0;
+            padding: var(--sidebar-inner-padding) 0;
+            width: unset;
+            height: fit-content;
         }
 
         #sidebar :global(.sidebar-inner-container:first-child) {
@@ -114,7 +116,7 @@
 
     /* add padding for notch / dynamic island in landscape */
     @media screen and (orientation: landscape) {
-        #sidebar.on-iPhone {
+        :global([data-iphone="true"]) #sidebar {
             padding-left: env(safe-area-inset-left);
         }
     }

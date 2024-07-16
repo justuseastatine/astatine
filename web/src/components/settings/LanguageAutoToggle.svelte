@@ -1,7 +1,7 @@
 <script lang="ts">
-    import settings from "$lib/settings";
+    import settings from "$lib/state/settings";
     import { device } from "$lib/device";
-    import { locale, locales } from "$lib/i18n/translations";
+    import { locale } from "$lib/i18n/translations";
 
     import SettingsToggle from "$components/buttons/SettingsToggle.svelte";
 
@@ -10,9 +10,7 @@
 
     const updateLocale = () => {
         if ($settings.appearance.autoLanguage) {
-            if ($locales.includes(device.preferredLocale)) {
-                $locale = device.preferredLocale;
-            }
+            $locale = device.prefers.language;
         } else {
             $locale = $settings.appearance.language;
         }

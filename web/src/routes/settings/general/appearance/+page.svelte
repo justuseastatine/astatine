@@ -12,12 +12,8 @@
     import LanguageAutoToggle from "$components/settings/LanguageAutoToggle.svelte";
 </script>
 
-<SettingsCategory
-    sectionId="theme"
-    title={$t("settings.theme")}
-    description={$t("settings.theme.description")}
->
-    <Switcher big={true}>
+<SettingsCategory sectionId="theme" title={$t("settings.theme")}>
+    <Switcher big={true} description={$t("settings.theme.description")}>
         {#each themeOptions as value}
             <SettingsButton
                 settingContext="appearance"
@@ -43,15 +39,15 @@
     title={$t("settings.accessibility")}
 >
     <SettingsToggle
-        settingContext="accessibility"
+        settingContext="appearance"
         settingId="reduceTransparency"
         title={$t("settings.accessibility.transparency.title")}
         description={$t("settings.accessibility.transparency.description")}
     />
     <SettingsToggle
-        settingContext="accessibility"
-        settingId="reduceAnimations"
-        title={$t("settings.accessibility.animations.title")}
-        description={$t("settings.accessibility.animations.description")}
+        settingContext="appearance"
+        settingId="reduceMotion"
+        title={$t("settings.accessibility.motion.title")}
+        description={$t("settings.accessibility.motion.description")}
     />
 </SettingsCategory>

@@ -3,20 +3,16 @@ import { defaultLocale } from "$lib/i18n/translations";
 import type { CobaltSettings } from "$lib/types/settings";
 
 const defaultSettings: CobaltSettings = {
-    schemaVersion: 1,
-    accessibility: {
-        reduceAnimations: false,
-        reduceTransparency: false,
+    schemaVersion: 2,
+    advanced: {
+        debug: false,
     },
     appearance: {
         theme: "auto",
         language: defaultLocale,
         autoLanguage: true,
-    },
-    general: {
-        customProcessingEndpoint: "",
-        seenOnboarding: false,
-        seenSafetyWarning: false,
+        reduceMotion: false,
+        reduceTransparency: false,
     },
     save: {
         audioFormat: "mp3",
@@ -32,8 +28,8 @@ const defaultSettings: CobaltSettings = {
         youtubeDubBrowserLang: false,
     },
     privacy: {
-        trafficAnalytics: true,
-    },
+        disableAnalytics: false
+    }
 }
 
 const defaultSettingsPage = () => {

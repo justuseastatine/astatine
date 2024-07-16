@@ -16,8 +16,8 @@ export const load: Load = async ({ url }) => {
 
     if (browser) {
         const device = (await import('$lib/device')).device;
-        const settings = get((await import('$lib/settings')).default);
-        const deviceLanguage = device.preferredLocale;
+        const settings = get((await import('$lib/state/settings')).default);
+        const deviceLanguage = device.prefers.language;
         const settingsLanguage = settings.appearance.language;
 
         const isValid = (lang: string) => (

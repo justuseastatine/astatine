@@ -1,25 +1,51 @@
-<script>
+<script lang="ts">
     import "@fontsource/ibm-plex-mono/400.css";
     import "@fontsource/ibm-plex-mono/500.css";
 
+    import env from "$lib/env";
+    import settings from "$lib/state/settings";
     import { device, app } from "$lib/device";
+    import { locale } from "$lib/i18n/translations";
     import currentTheme, { statusBarColors } from "$lib/state/theme";
 
     import Sidebar from "$components/sidebar/Sidebar.svelte";
     import NotchSticker from "$components/misc/NotchSticker.svelte";
+    import DialogHolder from "$components/dialog/DialogHolder.svelte";
+
+    $: reduceMotion =
+        $settings.appearance.reduceMotion
+        || device.prefers.reducedMotion;
+    $: reduceTransparency =
+        $settings.appearance.reduceTransparency
+        || device.prefers.reducedTransparency;
 </script>
 
 <svelte:head>
     {#if device.is.mobile}
         <meta name="theme-color" content={statusBarColors[$currentTheme]}>
     {/if}
+
+    {#if env.PLAUSIBLE_ENABLED}
+        <script
+            defer
+            data-domain="{env.HOST}"
+            src="https://{env.PLAUSIBLE_HOST}/js/script.js"
+        >
+        </script>
+    {/if}
 </svelte:head>
 
-<div style="display: contents" data-theme={$currentTheme}>
-    <div id="cobalt" class:on-iPhone={device.is.iPhone}>
+<div style="display: contents" data-theme={$currentTheme} lang="{$locale}">
+    <div
+        id="cobalt"
+        data-iphone={device.is.iPhone}
+        data-reduce-motion={reduceMotion}
+        data-reduce-transparency={reduceTransparency}
+    >
         {#if device.is.iPhone && app.is.installed}
             <NotchSticker />
         {/if}
+        <DialogHolder />
         <Sidebar />
         <div id="content">
             <slot></slot>
@@ -33,7 +59,7 @@
         --secondary: #000000;
 
         --white: #ffffff;
-        --gray: #8d8d95;
+        --gray: #75757e;
         --blue: #2f8af9;
         --green: #51cf5e;
 
@@ -57,9 +83,13 @@
         --border-radius: 11px;
 
         --sidebar-width: 80px;
-        --sidebar-height-mobile: calc(52px + env(safe-area-inset-bottom));
         --sidebar-font-size: 11px;
         --sidebar-inner-padding: 4px;
+        --sidebar-height-mobile: calc(
+            50px
+            + calc(var(--sidebar-inner-padding) * 2)
+            + env(safe-area-inset-bottom)
+        );
 
         --safe-area-inset-top: env(safe-area-inset-top);
 
@@ -75,11 +105,11 @@
         );
     }
 
-    :global([data-theme=dark]) {
+    :global([data-theme="dark"]) {
         --primary: #000000;
         --secondary: #e1e1e1;
 
-        --gray: #6e6e6e;
+        --gray: #818181;
         --blue: #2a7ce1;
         --green: #37aa42;
 
@@ -116,12 +146,18 @@
         overscroll-behavior-y: none;
     }
 
+    :global(body) {
+        background-color: var(--secondary);
+    }
+
     #cobalt {
         position: fixed;
         height: 100%;
         width: 100%;
         display: grid;
-        grid-template-columns: calc(var(--sidebar-width) + 8px) 1fr;
+        grid-template-columns: calc(
+                var(--sidebar-width) + var(--sidebar-inner-padding) * 2
+            ) 1fr;
         overflow: hidden;
         background-color: var(--sidebar-bg);
         color: var(--secondary);
@@ -129,12 +165,17 @@
 
     /* add padding for notch / dynamic island in landscape */
     @media screen and (orientation: landscape) {
-        #cobalt.on-iPhone {
+        #cobalt[data-iphone="true"] {
             grid-template-columns:
-                calc(var(--sidebar-width) + env(safe-area-inset-left) + 8px) 1fr;
+                calc(
+                    var(--sidebar-width)
+                    + var(--sidebar-inner-padding) * 2
+                    + env(safe-area-inset-left)
+                )
+                1fr;
         }
 
-        #cobalt.on-iPhone #content {
+        #cobalt[data-iphone="true"] #content {
             padding-right: env(safe-area-inset-right);
         }
     }
@@ -152,7 +193,7 @@
         #cobalt {
             display: grid;
             grid-template-columns: unset;
-            grid-template-rows: 1fr calc(var(--sidebar-height-mobile) + 8px);
+            grid-template-rows: 1fr var(--sidebar-height-mobile);
         }
         #content {
             padding-top: env(safe-area-inset-top);
@@ -164,7 +205,8 @@
     }
 
     :global(*) {
-        font-family: "IBM Plex Mono", "Noto Sans Mono Variable", "Noto Sans Mono", monospace;
+        font-family: "IBM Plex Mono", "Noto Sans Mono Variable",
+            "Noto Sans Mono", monospace;
         user-select: none;
         scrollbar-width: none;
         -webkit-user-select: none;
@@ -177,9 +219,13 @@
     }
 
     :global(a) {
-        text-decoration: none;
-        text-decoration-line: none;
+        color: inherit;
+        text-underline-offset: 3px;
         -webkit-touch-callout: none;
+    }
+
+    :global(a:visited) {
+        color: inherit;
     }
 
     :global(svg),
@@ -203,7 +249,7 @@
     }
 
     :global(:focus-visible) {
-        box-shadow: 0 0 0 2px var(--blue) inset;
+        box-shadow: 0 0 0 2px var(--blue) inset !important;
         outline: none;
         z-index: 1;
     }
@@ -273,11 +319,26 @@
         font-size: 11px;
     }
 
+    :global(dialog) {
+        max-height: 100%;
+        max-width: 100%;
+        padding: var(--padding);
+        border-radius: var(--border-radius);
+        border: none;
+        pointer-events: all;
+    }
+
     :global(.subtext) {
-        font-size: 12px;
+        font-size: 12.5px;
+        font-weight: 500;
         color: var(--gray);
         line-height: 1.4;
         padding: 0 var(--padding);
         white-space: pre-line;
+    }
+
+    [data-reduce-motion="true"] :global(*) {
+        animation: none !important;
+        transition: none !important;
     }
 </style>

@@ -15,7 +15,7 @@
 
     $: isTabActive = currentTab === baseTabPath;
 
-    const showTab = (e: HTMLElement | undefined) => {
+    const showTab = (e: HTMLElement) => {
         if (e) {
             e.scrollIntoView({
                 inline: firstTabPage.includes(tabName) ? "end" : "start",
@@ -24,8 +24,13 @@
         }
     };
 
-    $: if (isTabActive) {
+    $: if (isTabActive && tab) {
         showTab(tab);
+
+        tab.classList.add("animate");
+        setTimeout(() => {
+            tab.classList.remove("animate");
+        }, 220);
     }
 </script>
 
@@ -56,6 +61,10 @@
         opacity: 0.8;
         height: fit-content;
         border-radius: var(--border-radius);
+        transition: transform 0.2s;
+
+        text-decoration: none;
+        text-decoration-line: none;
     }
 
     .sidebar-tab :global(svg) {
@@ -64,18 +73,47 @@
         width: 21px;
     }
 
+    :global([data-iphone="true"] .sidebar-tab svg) {
+        will-change: transform;
+    }
+
     .sidebar-tab.active {
         color: var(--sidebar-bg);
         background: var(--sidebar-highlight);
         opacity: 1;
+        transition: none;
+        transform: none;
+    }
+
+    :global(.sidebar-tab.animate) {
+        animation: pressButton 0.2s;
     }
 
     .sidebar-tab:active:not(.active) {
-        opacity: 1;
-        background-color: var(--sidebar-hover);
+        transform: scale(0.95);
+    }
+
+    :global([data-reduce-motion="true"]) .sidebar-tab:active:not(.active) {
+        transform: none;
+    }
+
+    @keyframes pressButton {
+        0% {
+            transform: scale(0.95);
+        }
+        50% {
+            transform: scale(1.01);
+        }
+        100% {
+            transform: none;
+        }
     }
 
     @media (hover: hover) {
+        .sidebar-tab:active:not(.active) {
+            opacity: 1;
+            background-color: var(--sidebar-hover);
+        }
         .sidebar-tab:hover:not(.active) {
             opacity: 1;
             background-color: var(--sidebar-hover);
@@ -90,6 +128,22 @@
 
         .sidebar-tab.active {
             z-index: 2;
+        }
+
+        .sidebar-tab:active:not(.active) {
+            transform: scale(0.9);
+        }
+
+        @keyframes pressButton {
+            0% {
+                transform: scale(0.9);
+            }
+            60% {
+                transform: scale(1.015);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
     }
 </style>

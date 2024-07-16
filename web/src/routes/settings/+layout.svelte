@@ -1,6 +1,8 @@
 <script lang="ts">
     import { page } from "$app/stores";
 
+    import settings from "$lib/state/settings";
+
     import { t } from "$lib/i18n/translations";
 
     import SettingsNavTab from "$components/settings/SettingsNavTab.svelte";
@@ -11,8 +13,12 @@
     import IconMovie from "@tabler/icons-svelte/IconMovie.svelte";
     import IconMusic from "@tabler/icons-svelte/IconMusic.svelte";
     import IconFileSettings from "@tabler/icons-svelte/IconFileSettings.svelte";
+    import IconSettingsBolt from "@tabler/icons-svelte/IconSettingsBolt.svelte";
+    import IconBug from "@tabler/icons-svelte/IconBug.svelte";
+    import IconLock from "@tabler/icons-svelte/IconLock.svelte";
 
     import IconChevronLeft from "@tabler/icons-svelte/IconChevronLeft.svelte";
+
     import { goto } from "$app/navigation";
     import { defaultSettingsPage } from "$lib/settings/defaults";
 
@@ -41,8 +47,8 @@
 <svelte:window bind:innerWidth={screenWidth} />
 
 <div id="settings-page">
-    <div id="settings-sidebar">
-        <div id="settings-header" class:back-visible={!isHome && isMobile}>
+    <div id="settings-sidebar" class:back-visible={!isHome && isMobile}>
+        <div id="settings-header">
             {#if isMobile}
                 {#if !isHome}
                     <a
@@ -55,10 +61,10 @@
                     </a>
                 {/if}
                 <h3 id="settings-page-title" aria-level="1">
-                    {$t("tabs.settings")}
                     {#if !isHome}
-                        <span class="title-slash"> / </span>
                         {$t(`settings.page.${currentPageTitle}`)}
+                    {:else}
+                        {$t("tabs.settings")}
                     {/if}
                 </h3>
             {:else}
@@ -75,6 +81,13 @@
                     iconColor="blue"
                 >
                     <IconSunHigh />
+                </SettingsNavTab>
+                <SettingsNavTab
+                    tabName="privacy"
+                    tabLink="general/privacy"
+                    iconColor="blue"
+                >
+                    <IconLock />
                 </SettingsNavTab>
             </SettingsNavSection>
             <SettingsNavSection sectionTitle="save">
@@ -99,6 +112,24 @@
                 >
                     <IconFileSettings />
                 </SettingsNavTab>
+            </SettingsNavSection>
+            <SettingsNavSection>
+                <SettingsNavTab
+                    tabName="advanced"
+                    tabLink="advanced"
+                    iconColor="gray"
+                >
+                    <IconSettingsBolt />
+                </SettingsNavTab>
+                {#if $settings.advanced.debug}
+                    <SettingsNavTab
+                        tabName="debug"
+                        tabLink="advanced/debug"
+                        iconColor="gray"
+                    >
+                        <IconBug />
+                    </SettingsNavTab>
+                {/if}
             </SettingsNavSection>
         </nav>
     </div>
@@ -134,11 +165,16 @@
     #settings-navigation {
         display: flex;
         flex-direction: column;
+        overflow-y: scroll;
     }
 
     #settings-sidebar {
         width: var(--settings-nav-width);
         padding-top: var(--settings-padding);
+    }
+
+    #settings-sidebar.back-visible {
+        overflow: visible;
     }
 
     #settings-sidebar {
@@ -147,6 +183,7 @@
 
     #settings-navigation {
         gap: var(--padding);
+        padding-bottom: var(--padding);
     }
 
     #settings-header {
@@ -171,8 +208,8 @@
 
     .back-button :global(svg) {
         stroke-width: 2px;
-        height: 21px;
-        width: 21px;
+        height: 22px;
+        width: 22px;
     }
 
     .hidden-mobile {
@@ -219,10 +256,7 @@
         #settings-page-title {
             text-align: center;
             letter-spacing: -0.3px;
-        }
-
-        .title-slash {
-            color: var(--gray);
+            font-size: 16.5px;
         }
 
         #settings-navigation {
