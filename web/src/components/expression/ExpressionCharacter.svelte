@@ -6,7 +6,7 @@
     id="expression-character"
     src="/expression/smile.png"
     height="152"
-    width="141"
+    width="152"
     alt={$t("a11y.expression.smile")}
 />
 
