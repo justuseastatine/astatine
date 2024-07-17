@@ -5,6 +5,8 @@
 
     import { t } from "$lib/i18n/translations";
 
+    import dialogs from "$lib/dialogs";
+
     import { updateSetting } from "$lib/state/settings";
     import type { DownloadModeOption } from "$lib/types/settings";
 
@@ -25,6 +27,8 @@
     let link: string = "";
     let linkInput: HTMLInputElement | undefined;
     let isFocused = false;
+
+    let isDisabled: boolean = false;
 
     let downloadButton: SvelteComponent;
 
@@ -49,6 +53,10 @@
     }
 
     const pasteClipboard = () => {
+        if (isDisabled || $dialogs.length > 0) {
+            return;
+        }
+
         navigator.clipboard.readText().then(async (text) => {
             let matchLink = text.match(/https:\/\/[^\s]+/g);
             if (matchLink) {
@@ -65,7 +73,7 @@
     };
 
     const handleKeydown = (e: KeyboardEvent) => {
-        if (!linkInput) {
+        if (!linkInput || $dialogs.length > 0 || isDisabled) {
             return;
         }
 
@@ -134,7 +142,7 @@
             <ClearButton click={() => (link = "")} />
         {/if}
         {#if validLink(link)}
-            <DownloadButton url={link} bind:this={downloadButton} />
+            <DownloadButton url={link} bind:this={downloadButton} bind:isDisabled={isDisabled} />
         {/if}
     </div>
 
